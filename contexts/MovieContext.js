@@ -8,7 +8,6 @@ export const MovieProvider = ({ children }) => {
   const [myMovies, setMyMovies] = useState([]);
 
   const addMovie = (newMovie) => {
-    console.log("newMovie:", newMovie);
     // Check if the movie already exists
     if (!myMovies.some((movie) => movie.id === newMovie.id)) {
       setMyMovies((prevMovies) => [...prevMovies, newMovie]);

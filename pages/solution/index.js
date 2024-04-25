@@ -8,6 +8,7 @@ import {
   getGenres,
   getMoviesByGenre,
 } from "../../utils/request";
+import MovieCountBadge from "../../components/MovieCountBadge";
 
 function MovieList() {
   const [isLoading, setIsLoading] = useState(true);
@@ -125,9 +126,12 @@ function MovieList() {
             </select>
             <Link
               href="/solution/my-movies"
-              className="text-white bg-blue-500 px-4 py-2 rounded-lg"
+              className="text-white bg-blue-500 px-4 py-2 rounded-lg relative"
             >
-              My Movies
+              My Movies{" "}
+              {myMovies.length > 0 && (
+                <MovieCountBadge count={myMovies.length} />
+              )}
             </Link>
           </div>
         </div>
