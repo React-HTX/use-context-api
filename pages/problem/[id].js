@@ -68,7 +68,7 @@ function MoviePage() {
       <Head>
         <title>{movie ? `${movie.title} - Movie Details` : "Loading..."}</title>
       </Head>
-      <Link className="text-blue-500" href="/solution">
+      <Link className="text-blue-500" href="/problem">
         Back to movies
       </Link>
       <div className="flex justify-start gap-6 items-start">

@@ -135,7 +135,7 @@ function MovieList() {
               ))}
             </select>
             <Link
-              href="/solution/my-movies"
+              href="/problem/my-movies"
               className="text-white bg-blue-500 px-4 py-2 rounded-lg relative"
             >
               My Movies{" "}
@@ -154,7 +154,7 @@ function MovieList() {
             return (
               <li key={movie.id} className="mb-6">
                 <div className="relative">
-                  <Link href={`/solution/${movie.id}`} passHref>
+                  <Link href={`/problem/${movie.id}`} passHref>
                     <div className="hover:scale-105 hover:transition-transform duration-300">
                       <img
                         src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
