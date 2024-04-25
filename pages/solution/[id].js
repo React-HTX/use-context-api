@@ -65,7 +65,7 @@ function MoviePage() {
   const isMovieInList = myMovies.some((myMovie) => myMovie.id === movie.id);
 
   return (
-    <div className="container max-w-5xl mx-auto p-4">
+    <div className="container max-w-7xl mx-auto p-4">
       <Head>
         <title>{movie ? `${movie.title} - Movie Details` : "Loading..."}</title>
       </Head>
