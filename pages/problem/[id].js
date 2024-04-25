@@ -1,10 +1,10 @@
+/* **********************
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
 import { getMovieDetails } from "../../utils/request";
 import Head from "next/head";
-import { useMovieContext } from "../../contexts/MovieContext";
 
 function MoviePage() {
   const router = useRouter();
@@ -12,8 +12,9 @@ function MoviePage() {
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { myMovies, addMovie, removeMovie } = useMovieContext();
-  console.log("myMovies:", myMovies);
+
+  // There isn't a parent component to pass the myMovies state and the addMovie and removeMovie functions as props. We need to use the useMovieContext hook to access the context values.
+
   const handleToggleMovie = (movie) => {
     // Check if the movie is in myMovies list
     const isMovieInList = myMovies.some((myMovie) => myMovie.id === movie.id);
@@ -98,3 +99,4 @@ function MoviePage() {
 }
 
 export default MoviePage;
+* **********************/

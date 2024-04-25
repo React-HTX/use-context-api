@@ -1,11 +1,9 @@
+/* **********************
 import Head from "next/head";
 import Link from "next/link";
-import { useMovieContext } from "../../contexts/MovieContext";
 
 function MovieList() {
-  // useContext to get the movie context
-  const { myMovies, addMovie, removeMovie } = useMovieContext();
-  console.log("myMovies:", myMovies);
+  // There isn't a parent component to pass the myMovies state and the addMovie and removeMovie functions as props. We need to use the useMovieContext hook to access the context values.
 
   const handleToggleMovie = (movie) => {
     // Check if the movie is in myMovies list
@@ -26,7 +24,6 @@ function MovieList() {
 
   return (
     <>
-      {/* Quick Note: Using the Head component in Next.js does not require useEffect because it's a static declaration of metadata for the page. */}
       <Head>
         <title>Movie List</title>
         <meta name="description" content="List of trending movies" />
@@ -102,3 +99,4 @@ function MovieList() {
 }
 
 export default MovieList;
+********************** */

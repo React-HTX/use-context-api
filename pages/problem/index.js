@@ -1,21 +1,36 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import { useMovieContext } from "../../contexts/MovieContext";
 
 import {
   getTrendingMovies,
   getGenres,
   getMoviesByGenre,
 } from "../../utils/request";
+import MovieCountBadge from "../../components/MovieCountBadge";
 
 function MovieList() {
   const [isLoading, setIsLoading] = useState(true);
   const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useState("all");
   const [selectedGenre, setSelectedGenre] = useState("all");
-  // useContext to get the movie context
-  const { myMovies, addMovie, removeMovie } = useMovieContext();
+  const [myMovies, setMyMovies] = useState([]);
+
+  const addMovie = (newMovie) => {
+    // Check if the movie already exists
+    if (!myMovies.some((movie) => movie.id === newMovie.id)) {
+      setMyMovies((prevMovies) => [...prevMovies, newMovie]);
+    }
+  };
+
+  const removeMovie = (movieId) => {
+    // Check if the movie exists before removing it
+    if (myMovies.some((movie) => movie.id === movieId)) {
+      setMyMovies((prevMovies) =>
+        prevMovies.filter((movie) => movie.id !== movieId)
+      );
+    }
+  };
 
   const handleToggleMovie = (movie) => {
     // Check if the movie is in myMovies list
@@ -30,14 +45,13 @@ function MovieList() {
     }
   };
 
-  // fetch movies and genres
   useEffect(() => {
     const fetchMoviesAndGenres = async () => {
       try {
         const trendingMovies = await getTrendingMovies();
         const genres = await getGenres();
         setMovies(trendingMovies);
-        setIsLoading(false); // Move loading state update here after movies are fetched
+        setIsLoading(false);
         setGenres(genres);
       } catch (error) {
         console.error("Failed to fetch data:", error);
@@ -64,7 +78,6 @@ function MovieList() {
     fetchMoviesByGenre();
   }, [selectedGenre]);
 
-  // useEffect to filter movies based on genre
   if (isLoading) {
     return <div className="text-center">Loading movies...</div>;
   }
@@ -75,12 +88,10 @@ function MovieList() {
 
   const handleGenreChange = (event) => {
     setSelectedGenre(event.target.value);
-    // Implement filtering logic here if you want to filter movies based on the selected genre
   };
 
   return (
     <>
-      {/* Quick Note: Using the Head component in Next.js does not require useEffect because it's a static declaration of metadata for the page. */}
       <Head>
         <title>Trending Movies</title>
         <meta name="description" content="List of trending movies" />
@@ -125,9 +136,12 @@ function MovieList() {
             </select>
             <Link
               href="/solution/my-movies"
-              className="text-white bg-blue-500 px-4 py-2 rounded-lg"
+              className="text-white bg-blue-500 px-4 py-2 rounded-lg relative"
             >
-              My Movies
+              My Movies{" "}
+              {myMovies.length > 0 && (
+                <MovieCountBadge count={myMovies.length} />
+              )}
             </Link>
           </div>
         </div>
