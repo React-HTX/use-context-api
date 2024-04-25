@@ -1,4 +1,3 @@
-/* **********************
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -99,4 +98,3 @@ function MoviePage() {
 }
 
 export default MoviePage;
-* **********************/
